@@ -20,7 +20,10 @@ A full-stack application built with HTML, CSS, JavaScript, Python.
 
 ```
 CalculatorPro/
+├── Dockerfile
+├── README.md
 ├── app.py
+├── docker-compose.yml
 ├── flask_run.log
 ├── index.html
 ├── requirements.txt
