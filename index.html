@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Advanced Calculator</h1>
+    </header>
+
+    <main class="main-content">
+        <div class="calculator-container">
+            <input type="text" id="display" class="calculator-display" readonly>
+            <div class="buttons-grid">
+                <button class="btn control" id="clear">C</button>
+                <button class="btn operator" data-value="/">/</button>
+                <button class="btn operator" data-value="*">*</button>
+                <button class="btn operator" data-value="-">-</button>
+
+                <button class="btn number" data-value="7">7</button>
+                <button class="btn number" data-value="8">8</button>
+                <button class="btn number" data-value="9">9</button>
+                <button class="btn operator" data-value="+">+</button>
+
+                <button class="btn number" data-value="4">4</button>
+                <button class="btn number" data-value="5">5</button>
+                <button class="btn number" data-value="6">6</button>
+                <button class="btn equals" id="equals">=</button>
+
+                <button class="btn number" data-value="1">1</button>
+                <button class="btn number" data-value="2">2</button>
+                <button class="btn number" data-value="3">3</button>
+                <button class="btn operator" data-value=".">.</button>
+
+                <button class="btn number zero" data-value="0">0</button>
+                <button class="btn control history-toggle" id="viewHistory">History</button>
+            </div>
+        </div>
+
+        <div id="history-section" class="history-panel" style="display: none;">
+            <h2>Calculation History</h2>
+            <div id="history-display" class="history-list">
+                <!-- History items will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2023 Advanced Calculator</p>
+    </footer>
+
+    
+
+<script src="script.js"></script>
+</body>
+</html>

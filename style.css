@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* CSS Variables for Colors */
+:root {
+    --primary-color: #4CAF50; /* Green - for equals/history */
+    --secondary-color: #ECEFF1; /* Light Gray - for numbers */
+    --accent-color: #FF9800; /* Orange - for operators */
+    --bg-dark: #263238; /* Dark Slate Gray - for display */
+    --bg-light: #FFFFFF; /* White - for calculator/history card */
+    --text-dark: #212121; /* Dark Gray - general text */
+    --text-light: #FFFFFF; /* White - text on dark backgrounds */
+    --border-color: #CFD8DC; /* Light Blue Gray - subtle borders */
+    --error-color: #F44336; /* Red - for clear button */
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.2);
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right bottom, #f0f2f5, #e0e5ec); /* Subtle gradient background */
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Header Styling */
+.app-header {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 8px var(--shadow-dark);
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* Main Content Layout */
+.main-content {
+    flex-grow: 1; /* Allows main content to take available space */
+    width: 100%;
+    max-width: 900px; /* Centered max-width container */
+    margin: 20px auto;
+    padding: 0 15px;
+    display: flex; /* Use flex to arrange calculator and history side by side or stacked */
+    flex-direction: column; /* Stack calculator and history vertically by default */
+    align-items: center;
+    gap: 20px;
+}
+
+/* Calculator Container */
+.calculator-container {
+    background-color: var(--bg-light);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--shadow-dark);
+    width: 100%;
+    max-width: 400px; /* Specific max-width for calculator itself */
+}
+
+/* Display Input */
+.calculator-display {
+    width: 100%;
+    height: 70px;
+    padding: 10px 20px;
+    font-size: 2.5em;
+    text-align: right;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 4px var(--shadow-light);
+    outline: none; /* Remove default focus outline */
+    -webkit-appearance: none; /* For consistent styling across browsers */
+}
+
+/* Buttons Grid */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Base Button Styles */
+.btn {
+    padding: 20px 0;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    outline: none; /* Remove default focus outline */
+    user-select: none; /* Prevent text selection on buttons */
+    box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+/* Button Hover Effects */
+.btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+/* Specific Button Styles */
+.number:hover {
+    background-color: #E0E0E0; /* Slightly darker secondary for numbers */
+}
+
+.operator {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+}
+
+.operator:hover {
+    background-color: #E68A00; /* Slightly darker orange */
+}
+
+.control.clear {
+    background-color: var(--error-color);
+    color: var(--text-light);
+}
+
+.control.clear:hover {
+    background-color: #D32F2F; /* Slightly darker red */
+}
+
+.control.history-toggle {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.control.history-toggle:hover {
+    background-color: #388E3C; /* Slightly darker green */
+}
+
+.equals {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    grid-column: span 2; /* Make equals button span two columns */
+}
+
+.equals:hover {
+    background-color: #388E3C; /* Slightly darker green */
+}
+
+/* History Section */
+#history-section {
+    background-color: var(--bg-light);
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 8px 16px var(--shadow-dark);
+    width: 100%;
+    max-width: 400px; /* Match calculator width */
+    display: none; /* Initially hidden, JS will toggle this */
+}
+
+#history-section h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    font-size: 1.8em;
+}
+
+#history-display {
+    max-height: 250px; /* Limit height and enable scrolling */
+    overflow-y: auto;
+    padding-right: 10px; /* Space for scrollbar */
+}
+
+#history-display p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: var(--text-dark);
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 8px;
+    word-wrap: break-word; /* Ensure long calculations wrap */
+}
+
+#history-display p:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+/* Scrollbar Styling for History Display */
+#history-display::-webkit-scrollbar {
+    width: 8px;
+}
+
+#history-display::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
+#history-display::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+}
+
+/* Footer Styling */
+.app-footer {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    margin-top: auto; /* Push footer to the bottom */
+    box-shadow: 0 -4px 8px var(--shadow-dark);
+}
+
+.app-footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .app-header h1 {
+        font-size: 2em;
+    }
+
+    .main-content {
+        margin: 10px auto;
+        padding: 0 10px;
+    }
+
+    .calculator-container,
+    #history-section {
+        padding: 15px;
+        max-width: 350px;
+    }
+
+    .calculator-display {
+        height: 60px;
+        font-size: 2em;
+        padding: 8px 15px;
+        margin-bottom: 15px;
+    }
+
+    .buttons-grid {
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .btn {
+        padding: 15px 0;
+        font-size: 1.3em;
+    }
+
+    #history-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    #history-display p {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .calculator-container,
+    #history-section {
+        padding: 10px;
+        max-width: 95%; /* Allow it to take more width on very small screens */
+    }
+
+    .calculator-display {
+        height: 50px;
+        font-size: 1.8em;
+        padding: 5px 10px;
+    }
+
+    .btn {
+        padding: 12px 0;
+        font-size: 1.1em;
+    }
+
+    .buttons-grid {
+        gap: 8px;
+    }
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: #888;
+}

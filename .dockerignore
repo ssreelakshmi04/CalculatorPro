@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.local
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+ENV/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+README.md
+*.zip
